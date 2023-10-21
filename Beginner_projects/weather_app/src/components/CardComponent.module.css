@@ -1,0 +1,35 @@
+.card{
+    background-color: #2E5A88;
+    border: 2px solid #2E5A88;
+    border-radius: 3em;
+    color: white;
+    margin: 1.5em 1em;
+    text-align: center;
+}
+
+.card:hover{
+    transform: scale(1.2);
+}
+
+.card p{
+    font-size: 2em;
+}
+
+.cityName{
+    margin: auto 0;
+    width: 80%;
+    padding: 2em 0;
+}
+.cityName:hover{
+    transform: scale(1.1);
+}
+.cityName h2{
+    font-size: 3em;
+}
+.cityName h3{
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+.cityName p{
+    margin-top: 0;
+}
