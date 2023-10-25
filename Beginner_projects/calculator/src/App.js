@@ -30,6 +30,7 @@ const App = () => {
       setExpression(expression + label);
     }
   }
+
   return (
     <Fragment>
       <Header/>
