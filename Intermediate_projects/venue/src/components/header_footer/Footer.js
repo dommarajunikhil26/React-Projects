@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="bck_red">
             <Fade triggerOnce delay={500}>
                 <div className="font_righteous footer_logo_venue">The Venue</div>
-                <div classname="footer footer_copyright">Musical Events</div>
+                <div className="footer footer_copyright">Musical Events</div>
             </Fade>
         </footer>
     )
