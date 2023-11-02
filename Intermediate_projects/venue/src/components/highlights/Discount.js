@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Fade, Slide } from 'react-awesome-reveal';
+
+import MyButton from '../utility/myButton';
 
 const Discount = () => {
 
@@ -46,6 +48,16 @@ const Discount = () => {
                             interdum posuere lorem. Consequat id porta nibh venenatis cras. Accumsan lacus vel facilisis 
                             volutpat. Tristique magna sit amet purus gravida quis blandit.
                         </p>
+                        <MyButton
+                            text="Purchase Tickets"
+                            link="https:www.google.com"
+                            size="small"
+                            style={{
+                                color: '#ffffff',
+                                background: '#ffa800'
+                            }}
+                        />
+
                     </div>
                 </Slide>
             </div>
@@ -54,3 +66,4 @@ const Discount = () => {
 }
 
 export default Discount;
+
