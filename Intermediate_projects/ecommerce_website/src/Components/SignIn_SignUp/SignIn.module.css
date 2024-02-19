@@ -1,0 +1,18 @@
+.form{
+    width: 300px;
+    border: 1px solid #494F55;
+    border-radius: 5%;
+    padding: 20px;
+}
+
+.error{
+    text-align: center;
+    color: red;
+}
+
+.signUpLink{
+    text-align: center;
+    text-decoration: none;
+    color: #1565c0;
+    cursor: pointer;
+}
