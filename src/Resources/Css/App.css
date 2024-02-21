@@ -179,28 +179,35 @@ footer .footer_discl {
             FEATURED
 ===============================*/
 
+.container_width {
+    max-width: 1500px;
+    margin: 0 0;
+    background: #0d1831;
+    overflow: hidden;
+}
 .featured_wrapper {
-    margin: 0 auto;
-    width: 1280px;
+    margin: 0 0;
+    width: 1500px;
     margin-top: 90px;
     height: 800px;
     overflow: hidden;
-}
-
-.featured_stripes {
-    position: relative
-}
-
-.featured_text {
     position: relative;
-    font-family: 'Righteous', cursive;
+    /* Add this line */
 }
 
-
-.featured_stripes .stripe {
-    width: 230px;
-    height: 1200px;
+.stripe {
     position: absolute;
+}
+.stripe:nth-child(1) {
+    left: 30%;
+}
+
+.stripe:nth-child(2) {
+    left: 50%;
+}
+
+.stripe:nth-child(3) {
+    left: 70%;
 }
 
 .featured_number {
@@ -234,7 +241,7 @@ footer .footer_discl {
     font-size: 92px;
     text-transform: uppercase;
     padding: 0px 20px;
-}
+} */
 
 /*=============================
             MATCHES HOME

@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-
-
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { cityDb } from './temp/m-city-export';
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -19,11 +19,53 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 const firebase = getAuth(app);
+const db = getFirestore(app);
+
+cityDb.matches.forEach(async (match) => {
+    try {
+        await addDoc(collection(db, 'matches'), match);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+cityDb.players.forEach(async (player) => {
+    try {
+        await addDoc(collection(db, 'players'), player);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+cityDb.positions.forEach(async (position) => {
+    try {
+        await addDoc(collection(db, 'positions'), position);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+cityDb.promotions.forEach(async (promotion) => {
+    try {
+        await addDoc(collection(db, 'promotions'), promotion);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+cityDb.teams.forEach(async (team) => {
+    try {
+        await addDoc(collection(db, 'teams'), team);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 
 export{
-    firebase
+    firebase, db
 }
 
 

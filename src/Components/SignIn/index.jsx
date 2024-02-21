@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { firebase } from '../../firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -37,7 +38,7 @@ const SignIn = (props) => {
 
         signInWithEmailAndPassword(firebase, values.email, values.password)
         .then(() => {
-            showToastSuccess("Successfully Signed in!!");
+            showToastSuccess("Welcome!!");
             navigate("/dashboard");
         }).catch(error => {
             setLoading(false);

@@ -1,13 +1,17 @@
-
 // eslint-disable-next-line react/prop-types
+
+import AdminLayout from "../Hoc/AdminLayout";
+
 const Dashboard = () => {
     return(
-        <>
-            <br /><br /><br /><br /><br /><br />
-            <h1>This is Dashboard</h1>
+        <AdminLayout>
+            <div className="user_dashboard">
+                <div>
+                    This is your dashboard
+                </div>
+            </div>
 
-
-        </>
+        </AdminLayout>
     )
 }
 

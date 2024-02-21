@@ -1,9 +1,12 @@
+import Featured from "./Featured";
+import MatchesHome from "./Matches";
 
 const Home = () => {
     return(
-        <>
-            <h1>This is home</h1>
-        </>
+        <div className="container_width">
+            <Featured/>
+            <MatchesHome/>
+        </div>
     )
 }
 
