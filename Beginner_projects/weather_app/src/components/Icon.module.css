@@ -1,0 +1,7 @@
+.icon img{
+    height: 100%;
+    width: 100%;
+}
+.icon img:hover{
+    transform: scale(1.1);
+}

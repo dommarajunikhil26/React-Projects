@@ -1,0 +1,19 @@
+.footer{
+    text-align: center;
+    background-color: #4e91fd;
+    padding: 0.5em;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.footer_title{
+    color: aliceblue;
+    font-size: 2em;
+}
+
+.footer_copyright{
+    color: aliceblue;
+    font-size: 1em;
+}

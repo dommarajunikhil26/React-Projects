@@ -1,0 +1,27 @@
+.red{
+    height: 200px;
+    width: 100%;
+    background-color: red;
+}
+
+.blue {
+    height: 200px;
+    width: 100%;
+    background-color: blue;
+}
+
+.green {
+    height: 200px;
+    width: 100%;
+    background-color: green;
+}
+
+.yellow {
+    height: 200px;
+    width: 100%;
+    background-color: yellow;
+}
+
+.content{
+    margin-top: 64px;
+}
