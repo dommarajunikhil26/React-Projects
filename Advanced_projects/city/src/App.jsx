@@ -11,6 +11,7 @@ import SignIn from './Components/SignIn';
 import Dashboard from "./Components/Admin/Dashboard";
 import AuthGuard from "./Components/Hoc/Auth";
 import AdminPlayers from './Components/Admin/Players';
+import AddEditPlayers from './Components/Admin/Players/addEditPlayers';
 
 const App = ({user}) => {
 
@@ -28,6 +29,8 @@ const App = ({user}) => {
                     <Route element={<AuthGuard isAuth={isAuthenticated}/>}>
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/admin_players" element={<AdminPlayers/>}/>
+                        <Route path="/admin_players/add_player" element={<AddEditPlayers/>}/>
+                        <Route path="/admin_players/edit_player/:playerid" element={<AddEditPlayers/>}/>
                     </Route>
                     <Route path="/" element={<Home/>}/>
                 </Routes>
