@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { cityDb } from './temp/m-city-export';
@@ -21,6 +22,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const firebase = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 // cityDb.matches.forEach(async (match) => {
 //     try {
@@ -65,7 +67,7 @@ const db = getFirestore(app);
 
 
 export{
-    firebase, db
+    firebase, db, storage
 }
 
 

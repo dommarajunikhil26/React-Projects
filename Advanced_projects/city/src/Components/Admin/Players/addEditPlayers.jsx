@@ -4,21 +4,24 @@ import AdminLayout from "../../Hoc/AdminLayout";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { showToastError, showToastSuccess, textErrorHelper, selectErrorHelper, selectIsError } from "../../Helper/tools";
-import { db } from "../../../firebase";
+import { db, storage } from "../../../firebase"; // Import storage from Firebase
 import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore";
 import { Button, FormControl, MenuItem, Select, TextField } from "@mui/material";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const defaultValues = {
     name: '',
     lastname: '',
     number: '',
-    position: ''
+    position: '',
+    image: null
 }
 
 const AddEditPlayers = () => {
     const [loading, setLoading] = useState(false);
     const [formType, setFormType] = useState('');
     const [values, setValues] = useState(defaultValues);
+    const [imageUrl, setImageUrl] = useState(null); 
     const { playerid } = useParams(); 
 
     const formik = useFormik({
@@ -35,42 +38,49 @@ const AddEditPlayers = () => {
             .required('This input is required'),
             position: Yup.string()
             .required('This input is required'),
+            image: Yup.mixed() 
+            .required('Image is required')
         }),
         onSubmit:(values) => {
             submitForm(values);
         }
     })
 
-    const submitForm = (values) => {
-        let dataToSubmit = values;
+    const handleImageChange = (e) => {
+        setValues({ ...values, image: e.target.files[0] });
+    };
+
+    const submitForm = async (values) => {
         setLoading(true);
-        if(formType === 'add'){
-            const addPlayer = async () => {
-                try{
-                    await addDoc(collection(db, 'players'), dataToSubmit);
-                    formik.resetForm();
-                    showToastSuccess("Player Successfully added!!");
-                }catch(error){
-                    showToastError(error);
-                } finally {
-                    setLoading(false);
-                }
-            }
-            addPlayer();
-        }else{
-            const editPLayer = async () => {
-                try{
-                    await setDoc(doc(db, 'players', playerid), dataToSubmit);
-                    showToastSuccess("Player info edited");
-                } catch(error){
-                    showToastError(error);
-                } finally {
-                    setLoading(false);
-                }
-            }
-            editPLayer();
+        let imageUrl = '';
+
+        try {
+            const storageRef = ref(storage, `playerImages/${values.image.name}`);
+            await uploadBytes(storageRef, values.image);
+            imageUrl = await getDownloadURL(storageRef);
+        } catch (error) {
+            setLoading(false);
+            showToastError('Failed to upload image: ' + error.message); 
+            return;
         }
-    }
+
+        const dataToSubmit = { ...values, image: imageUrl };
+
+        try {
+            if (formType === 'add') {
+                await addDoc(collection(db, 'players'), dataToSubmit);
+                formik.resetForm();
+                showToastSuccess("Player Successfully added!!");
+            } else {
+                await setDoc(doc(db, 'players', playerid), dataToSubmit);
+                showToastSuccess("Player info edited");
+            }
+        } catch (error) {
+            showToastError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -81,6 +91,9 @@ const AddEditPlayers = () => {
                         const playerData = playerDoc.data();
                         setFormType('edit');
                         setValues(playerData);
+
+                        const imageUrl = playerData.image;
+                        setImageUrl(imageUrl);
                     } else {
                         showToastError("Player not found");
                     }
@@ -95,15 +108,21 @@ const AddEditPlayers = () => {
         fetchData();
     }, [playerid]);
 
-
     return (
         <AdminLayout title={formType === 'add' ? 'Add Player' : 'Edit Player'}>
             <div className="ediplayers_dialog_wrapper">
                 <div>
                     <form onSubmit={formik.handleSubmit}>
-                        image
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                        />
                         <hr/>
                         <h4>Player info</h4>
+                        {imageUrl && (
+                            <img src={imageUrl} alt="Player" />
+                        )}
                         <div className="mb-5">
                             <FormControl>
                                 <TextField 
