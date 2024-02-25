@@ -14,7 +14,6 @@ const Application = (props) => {
 };
 
 firebase.onAuthStateChanged((user) => {
-  console.log(user);
 
   // Render your application inside the root instance
   root.render(

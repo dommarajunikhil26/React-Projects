@@ -30,7 +30,7 @@ const App = ({user}) => {
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/admin_players" element={<AdminPlayers/>}/>
                         <Route path="/admin_players/add_player" element={<AddEditPlayers/>}/>
-                        <Route path="/admin_players/edit_player/:playerid" element={<AddEditPlayers/>}/>
+                        <Route path="/admin_players/edit_player/:playerid" element={<AddEditPlayers />} />
                     </Route>
                     <Route path="/" element={<Home/>}/>
                 </Routes>

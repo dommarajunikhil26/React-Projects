@@ -45,7 +45,6 @@ const AdminPlayers = () => {
                 setPlayers(playersData);
             } else {
                 const newPlayers = playersData.filter(player => !players.find(existingPlayer => existingPlayer.id === player.id));
-                console.log(newPlayers);
                 if(newPlayers.length > 0)
                 {
                     setPlayers(prevPlayers => [...prevPlayers, ...newPlayers])
