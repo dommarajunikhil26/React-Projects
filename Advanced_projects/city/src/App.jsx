@@ -12,6 +12,7 @@ import Dashboard from "./Components/Admin/Dashboard";
 import AuthGuard from "./Components/Hoc/Auth";
 import AdminPlayers from './Components/Admin/Players';
 import AddEditPlayers from './Components/Admin/Players/addEditPlayers';
+import Team from './Components/theTeam';
 
 const App = ({user}) => {
 
@@ -26,6 +27,7 @@ const App = ({user}) => {
             <Header user={user}/>
                 <Routes>
                     <Route path="/sign_in" element={<SignIn isSignedIn={isAuthenticated}/>}/>
+                        <Route path="/the_team" element={<Team/>}/>
                     <Route element={<AuthGuard isAuth={isAuthenticated}/>}>
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/admin_players" element={<AdminPlayers/>}/>

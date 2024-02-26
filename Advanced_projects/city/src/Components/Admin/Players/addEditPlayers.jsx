@@ -4,7 +4,7 @@ import AdminLayout from "../../Hoc/AdminLayout";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { showToastError, showToastSuccess, textErrorHelper, selectErrorHelper, selectIsError } from "../../Helper/tools";
-import { db, storage } from "../../../firebase"; // Import storage from Firebase
+import { db, storage } from "../../../firebase"; 
 import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore";
 import { Button, FormControl, MenuItem, Select, TextField } from "@mui/material";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
