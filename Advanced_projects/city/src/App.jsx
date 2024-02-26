@@ -15,6 +15,8 @@ import AddEditPlayers from './Components/Admin/Players/addEditPlayers';
 import Team from './Components/theTeam';
 import AdminMatches from './Components/Admin/Matches';
 import AddEditMatches from './Components/Admin/Matches/addEditMatches';
+import Matches from './Components/theMatches';
+import NotFound from './Components/notFound';
 
 const App = ({user}) => {
 
@@ -30,6 +32,7 @@ const App = ({user}) => {
                 <Routes>
                     <Route path="/sign_in" element={<SignIn isSignedIn={isAuthenticated}/>}/>
                     <Route path="/the_team" element={<Team/>}/>
+                    <Route path="/the_matches" element={<Matches/>}/>
                     <Route element={<AuthGuard isAuth={isAuthenticated}/>}>
                         <Route path="/dashboard" element={<Dashboard/>}/>
 
@@ -42,6 +45,8 @@ const App = ({user}) => {
                         <Route path="/admin_matches/edit_match/:matchid" element={<AddEditMatches />} />
                     </Route>
                     <Route path="/" element={<Home/>}/>
+                    <Route element={<NotFound/>} />
+
                 </Routes>
                 <ToastContainer/>
             <Footer/>

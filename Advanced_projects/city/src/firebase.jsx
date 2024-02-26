@@ -4,8 +4,6 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { cityDb } from './temp/m-city-export';
 
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
 
 const firebaseConfig = {
     apiKey: "AIzaSyDKXSAmWslcBcl5U-hsiLf4Zvb5TbUw6NU",
