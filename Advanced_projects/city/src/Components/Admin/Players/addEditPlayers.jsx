@@ -110,7 +110,7 @@ const AddEditPlayers = () => {
 
     return (
         <AdminLayout title={formType === 'add' ? 'Add Player' : 'Edit Player'}>
-            <div className="ediplayers_dialog_wrapper">
+            <div className="editplayers_dialog_wrapper">
                 <div>
                     <form onSubmit={formik.handleSubmit}>
                         <input
