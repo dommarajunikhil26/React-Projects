@@ -3,8 +3,11 @@ const app = express();
 const mongoose = require('mongoose');
 const {xss} = require('express-xss-sanitizer'); //This is a middleware that helps us from people breaking our server
 const mongoSanitize = require('express-mongo-sanitize'); // To block the harmful requests to server
+
 const routes = require('./routes');
 require('dotenv').config();
+
+const {handleError, convertToApiError} = require('./middleware/apiError');
 
 const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}?retryWrites=true&w=majority&appName=${process.env.DB_APPNAME}`
 mongoose.connect(mongoUri);
@@ -19,6 +22,12 @@ app.use(mongoSanitize());
 // routes
 app.use('/api', routes);
 
+
+// Handle Api errors
+app.use(convertToApiError);
+app.use((err, req, res, next) => {
+    handleError(err, res)
+})
 
 const port = process.env.PORT;
 app.listen(port,() =>{
