@@ -1,22 +1,33 @@
 const passport = require('passport');
 const { ApiError } = require('./apiError');
 const httpStatus = require('http-status');
+const { roles } = require('../config/roles');
 
-
-const verify = ( req, res, resolve, reject ) => async(err, user)=>{
+const verify = ( req, res, resolve, reject, rights ) => async(err, user)=>{
     if( err || !user){
        return reject(new ApiError(httpStatus.UNAUTHORIZED,'Sorry, unauthorized'))
     }
-
-
     req.user = user;
+
+    if(rights.length){ 
+        const action = rights[0]; // createAny, readAny
+        const resource = rights[1]; //resources dog, profile, user
+        const permission = roles.can(req.user.role)[action](resource);
+
+        if(!permission.granted){
+            return reject(new ApiError(httpStatus.FORBIDDEN, 'Sorry, You dont have permissions'))
+        }
+        res.locals.permission = permission;
+    }
+
+
     resolve()
 }
 
 
-const auth = () => async(req,res,next) => {
+const auth = (...rights) => async(req,res,next) => {
     return new Promise((resolve, reject)=>{
-        passport.authenticate('jwt',{ session:false}, verify( req, res, resolve, reject))(req,res,next)
+        passport.authenticate('jwt',{ session:false}, verify( req, res, resolve, reject, rights))(req,res,next)
     })
     .then(()=> next())
     .catch((err)=> next(err))
