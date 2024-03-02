@@ -70,12 +70,18 @@ userSchema.pre('save', async function(next){
 // In methods we have previous data
 userSchema.methods.generateAuthToken = function(){
     let user = this;
-    const userObj = { sub: user._id.toHexString() };
+    const userObj = { sub: user._id.toHexString(), email:user.email };
     const token = jwt.sign(userObj, process.env.SECRET_PASSWORD, {expiresIn: '1d'});
 
     return token;
 }
 
+userSchema.methods.generateRegisterToken = function(){
+    let user = this;
+    const userObj = { sub: user._id.toHexString() };
+    const token = jwt.sign(userObj, process.env.SECRET_PASSWORD, {expiresIn: '10d'});
+    return token;
+}
 
 // In statics we don't have the previous data.
 userSchema.statics.emailTaken = async function(email){
