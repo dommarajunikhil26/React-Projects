@@ -76,7 +76,6 @@ const paginateProducts = async(req) => {
         //     "frets":24
         // }
 
-    ""
         let aggQueryArray = [];
 
         if(req.body.keywords && req.body.keywords != ''){
