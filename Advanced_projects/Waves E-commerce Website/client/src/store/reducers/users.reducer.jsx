@@ -15,10 +15,6 @@ let DEFAULT_USER_STATE = {
 
 export default function usersReducer(state = DEFAULT_USER_STATE, action) {
     switch (action.type) {
-        // case value:
-
-        //     break;
-
         default:
             return state
     }

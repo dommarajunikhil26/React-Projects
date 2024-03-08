@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const {xss} = require('express-xss-sanitizer'); //This is a middleware that helps us from people breaking our server
@@ -13,6 +14,9 @@ const { jwtStrategy } = require('./middleware/passport');
 
 const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}?retryWrites=true&w=majority&appName=${process.env.DB_APPNAME}`
 mongoose.connect(mongoUri);
+
+// Enable CORS for all requests
+app.use(cors());
 
 // body parser
 app.use(express.json())

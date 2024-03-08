@@ -51,19 +51,24 @@ const deleteProductById = async(body) => {
 
 const allProducts = async(req) => {
     try {
+        let sortCriteria = {};
+        const sortBy = req.query.sortBy ? req.query.sortBy : 'createdAt'; // Default sorting field
+        const order = req.query.order === 'desc' ? -1 : 1; // Default sorting order
+
+        sortCriteria[sortBy] = order;
+
         const products = await Product
         .find({})
         .populate('brand')
-        .sort([
-            [req.query.sortBy,req.query.order]
-        ])
-        .limit(parseInt(req.query.limit));
+        .sort(sortCriteria) // Adjusted to use the constructed sort criteria object
+        .limit(parseInt(req.query.limit) || 10); // Provide a default limit if not specified
 
-        return products
+        return products;
     } catch(error) {
-        throw error
+        throw error;
     }
 }
+
 
 const paginateProducts = async(req) => {
     try{
