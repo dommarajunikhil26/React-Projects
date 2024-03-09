@@ -1,6 +1,6 @@
 import Featured from "./featured";
 import SlimPromotion from "../utils/promotions/slim.block";
-import loader from "../utils/loader";
+import Loader from "../utils/loader";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -38,7 +38,7 @@ const Home = () => {
                     items={bySold}
                     title="Best Selling Guitars"
                 />
-                : <loader />
+                : <Loader />
             }
             <SlimPromotion items={slimPromotion} />
             {byDate ?
@@ -46,7 +46,7 @@ const Home = () => {
                     items={byDate}
                     title="Latest Guitars on the shop"
                 />
-                : <loader />
+                : <Loader />
             }
         </div>
     )

@@ -22,6 +22,6 @@ export const productsBySort = ({ limit, sortBy, order, where }) => async dispatc
 
         }
     } catch (error) {
-        console.error(error);
+        dispatch(actions.errorGlobal(error.response.data.message))
     }
 };
