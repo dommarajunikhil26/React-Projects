@@ -1,14 +1,19 @@
+/* eslint-disable react/prop-types */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Loader from '../utils/loader';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button } from '@mui/material';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { errorHelper } from '../utils/tools';
+import { userRegister } from '../../store/actions/user.actions';
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm = (props) => {
-
+    const navigate = useNavigate();
+    const notifications = useSelector(state => state.notifications);
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
@@ -21,9 +26,26 @@ const AuthForm = (props) => {
                 .required('Password is required')
         }),
         onSubmit: (values) => {
-            console.log(values);
+            setLoading(true);
+            handleSubmit(values)
         }
     })
+
+    const handleSubmit = (values) => {
+        if (props.formType) {
+            dispatch(userRegister(values))
+        } else {
+            // signout
+        }
+    }
+
+    useEffect(() => {
+        if (notifications && notifications.success) {
+            navigate("/dashboard");
+        } else {
+            setLoading(false);
+        }
+    }, [notifications, props.history])
 
     return (
         <>
@@ -34,22 +56,23 @@ const AuthForm = (props) => {
                     <form className='mt-3' onSubmit={formik.handleSubmit}>
                         <div className='form-group'>
                             <TextField
-                                style={{ width: '100%' }}
+                                style={{ width: '100%', marginBottom: '10px' }}
                                 name='email'
                                 label='Enter your email'
                                 variant='outlined'
                                 {...formik.getFieldProps('email')}
-
+                                {...errorHelper(formik, 'email')}
                             />
                         </div>
                         <div className='form-group'>
                             <TextField
-                                style={{ width: '100%' }}
+                                style={{ width: '100%', marginBottom: '10px' }}
                                 name='password'
                                 label='Enter your password'
                                 variant='outlined'
                                 type='password'
                                 {...formik.getFieldProps('password')}
+                                {...errorHelper(formik, 'password')}
                             />
                             <Button
                                 variant='contained'

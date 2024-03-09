@@ -52,12 +52,26 @@ export const showToast = (type, msg) => {
     switch (type) {
         case 'SUCCESS':
             toast.success(msg, {
-                position: toast.POSITION.BOTTOM_RIGHT
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
             })
             break;
         case 'ERROR':
             toast.error(msg, {
-                position: toast.POSITION.BOTTOM_RIGHT
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
             })
             break;
         default:
@@ -65,3 +79,8 @@ export const showToast = (type, msg) => {
     }
 
 }
+
+export const errorHelper = (formik, value) => ({
+    error: formik.errors[value] && formik.touched[value] ? true : false,
+    helperText: formik.errors[value] && formik.touched[value] ? formik.errors[value] : null
+});

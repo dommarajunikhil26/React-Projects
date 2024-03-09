@@ -28,10 +28,10 @@ const registerEmail = async(useremail, user) => {
                 name:useremail,
                 intro:'Welcome to Waves We\'re very excited to have you on board.',
                 action:{
-                    instructions:'To get validate account, please click here',
+                    instructions:'To validate your account, please click here',
                     button:{
                         color: '#1a73e8',
-                        text: 'Validate your string',
+                        text: 'Validate your Account',
                         link: `${process.env.SITE_DOMAIN}verification?t=${emailToken}`
                     }
                 },
