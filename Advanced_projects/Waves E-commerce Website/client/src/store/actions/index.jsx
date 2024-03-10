@@ -4,13 +4,18 @@ import {
     ERROR_GLOBAL,
     SUCCESS_GLOBAL,
     CLEAR_NOTIFICATION,
-    AUTH_USER
+    AUTH_USER,
+    SIGN_OUT
 } from '../types';
 
 // User
 export const userAuthenticate = (user) => ({
     type: AUTH_USER,
     payload: user
+})
+
+export const userSignOut = () => ({
+    type: SIGN_OUT
 })
 
 // Products

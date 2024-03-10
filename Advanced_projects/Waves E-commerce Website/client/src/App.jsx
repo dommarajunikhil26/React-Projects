@@ -6,15 +6,21 @@ import Home from "./components/home";
 import RegisterLogin from "./components/auth";
 import Dashboard from "./components/Dashboard";
 import Loader from "./components/utils/loader";
-import { userIsAuth } from "./store/actions/user.actions";
+import { userIsAuth, userSignOut } from "./store/actions/user.actions";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
+  axios.defaults.withCredentials = true;
+
+  const signOutUser = () => {
+    dispatch(userSignOut())
+  }
 
   useEffect(() => {
     dispatch(userIsAuth())
@@ -29,8 +35,13 @@ const App = () => {
   return (
     <BrowserRouter>
       {loading ?
-        <Loader full={true} /> : <>
-          <Header />
+        <Loader full={true} />
+        :
+        <>
+          <Header
+            users={users}
+            signOutUser={signOutUser}
+          />
           <MainLayout>
             <Routes>
               <Route path="/sign_in" element={<RegisterLogin />} />

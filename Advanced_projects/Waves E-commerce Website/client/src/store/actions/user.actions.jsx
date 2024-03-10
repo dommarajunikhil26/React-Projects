@@ -1,6 +1,7 @@
 import * as actions from './index';
 import axios from 'axios';
 import { getAuthHeader } from '../../components/utils/tools';
+import cookie from 'react-cookies';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -46,5 +47,13 @@ export const userIsAuth = (token) => {
             dispatch(actions.userAuthenticate({ data: {}, auth: false }))
         }
 
+    }
+}
+
+export const userSignOut = () => {
+    return async (dispatch) => {
+        cookie.remove('x-access-token', { path: '/' });
+        dispatch(actions.userSignOut());
+        dispatch(actions.successGlobal('Successfully signed out'));
     }
 }
