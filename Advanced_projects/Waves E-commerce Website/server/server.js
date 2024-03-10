@@ -16,7 +16,11 @@ const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD
 mongoose.connect(mongoUri);
 
 // Enable CORS for all requests
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true,
+}
+app.use(cors(corsOptions));
 
 // body parser
 app.use(express.json())

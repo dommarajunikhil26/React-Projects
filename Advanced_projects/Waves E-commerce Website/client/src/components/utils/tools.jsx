@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useCookies } from 'react-cookie';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export const WavesButton = (props) => {
@@ -84,3 +85,17 @@ export const errorHelper = (formik, value) => ({
     error: formik.errors[value] && formik.touched[value] ? true : false,
     helperText: formik.errors[value] && formik.touched[value] ? formik.errors[value] : null
 });
+
+
+export const useAuthToken = () => {
+    const [cookies] = useCookies(['x-access-token']);
+    return cookies['x-access-token'];
+};
+
+export const getAuthHeader = (token) => {
+    if (!token) {
+        console.error('No auth token found');
+        return {};
+    }
+    return { headers: { 'Authorization': `Bearer ${token}` } };
+};
