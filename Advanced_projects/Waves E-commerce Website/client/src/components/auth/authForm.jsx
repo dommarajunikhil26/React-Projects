@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { errorHelper } from '../utils/tools';
-import { userRegister } from '../../store/actions/user.actions';
+import { userRegister, userSignIn } from '../../store/actions/user.actions';
 import { useNavigate } from 'react-router-dom';
 
 const AuthForm = (props) => {
@@ -35,7 +35,7 @@ const AuthForm = (props) => {
         if (props.formType) {
             dispatch(userRegister(values))
         } else {
-            // signout
+            dispatch(userSignIn(values))
         }
     }
 
@@ -45,7 +45,7 @@ const AuthForm = (props) => {
         } else {
             setLoading(false);
         }
-    }, [notifications, props.history])
+    }, [notifications, navigate])
 
     return (
         <>
