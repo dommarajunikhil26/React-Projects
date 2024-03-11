@@ -1,4 +1,3 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./hoc/mainLayout";
 import Header from "./components/navigation/headers";
 import Footer from "./components/navigation/footer";
@@ -6,20 +5,23 @@ import Home from "./components/home";
 import RegisterLogin from "./components/auth";
 import Dashboard from "./components/Dashboard";
 import Loader from "./components/utils/loader";
-import { userIsAuth, userSignOut } from "./store/actions/user.actions";
+import AuthGuard from "./hoc/authGuard";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
+import { userIsAuth, userSignOut } from "./store/actions/user.actions";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const users = useSelector(state => state.users);
+  console.log(users);
   const dispatch = useDispatch();
   axios.defaults.withCredentials = true;
 
   const signOutUser = () => {
-    dispatch(userSignOut())
+    dispatch(userSignOut());
   }
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const App = () => {
       setLoading(false)
     }
   }, [users])
+
 
   return (
     <BrowserRouter>
@@ -45,8 +48,10 @@ const App = () => {
           <MainLayout>
             <Routes>
               <Route path="/sign_in" element={<RegisterLogin />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route element={<AuthGuard isAuth={users.auth} />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/" element={<Home />} />
+              </Route>
             </Routes>
           </MainLayout>
           <Footer />

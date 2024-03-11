@@ -1,15 +1,15 @@
-/* eslint-disable react/prop-types */
-import { Navigate, Outlet} from "react-router-dom";
 
-const AuthGuard = (props) => {
+import { Navigate, useLocation } from 'react-router-dom';
 
-    if(!props.isAuth){
-        return <Navigate to='/sign_in' />
-    } else{
-        return <Outlet />
+const ProtectedRoute = ({ isAuth, children }) => {
+    const location = useLocation();
+
+    if (!isAuth) {
+        console.log("Redirecting to /sign_in...");
+        return <Navigate to="/sign_in" replace />;
     }
 
-    
-}
+    return children;
+};
 
-export default AuthGuard;
+export default ProtectedRoute;
