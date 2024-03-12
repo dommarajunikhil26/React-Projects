@@ -5,7 +5,8 @@ import Home from "./components/home";
 import RegisterLogin from "./components/auth";
 import Dashboard from "./components/Dashboard";
 import Loader from "./components/utils/loader";
-import AuthGuard from "./hoc/authGuard";
+// import AuthGuard from "./hoc/authGuard";
+import UserInfo from "./components/Dashboard/admin/info";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -22,6 +23,7 @@ const App = () => {
 
   const signOutUser = () => {
     dispatch(userSignOut());
+
   }
 
   useEffect(() => {
@@ -48,10 +50,11 @@ const App = () => {
           <MainLayout>
             <Routes>
               <Route path="/sign_in" element={<RegisterLogin />} />
-              <Route element={<AuthGuard isAuth={users.auth} />}>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/" element={<Home />} />
-              </Route>
+              {/* <Route element={<AuthGuard isAuth={users.auth} />}> */}
+              <Route path="/dashboard" element={<Dashboard users={users} />} />
+              <Route path="/dashboard/user/user_info" element={<UserInfo users={users} />} />
+              <Route path="/" element={<Home />} />
+              {/* </Route> */}
             </Routes>
           </MainLayout>
           <Footer />
