@@ -10,7 +10,7 @@ import { Button, TextField } from "@mui/material";
 const UserInfo = ({ users }) => {
     const dispatch = useDispatch();
     const formik = useFormik({
-        enableReinitialize: true, //reset the form on user prop change
+        enableReinitialize: true,
         initialValues: {
             firstname: users.data.firstname,
             lastname: users.data.lastname,
