@@ -8,6 +8,9 @@ export default {
     extend: {
       colors: {
         'cornflowerblue': '#6495ED',
+      },
+      fontFamily: {
+        righteous: ['Righteous', 'cursive'],
       }
     },
   },

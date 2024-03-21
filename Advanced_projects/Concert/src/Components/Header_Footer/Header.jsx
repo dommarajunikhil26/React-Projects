@@ -1,51 +1,54 @@
-import { useState, useEffect } from 'react';
-import { AppBar, Toolbar, IconButton } from '@mui/material';
+import { AppBar, Toolbar, IconButton } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import SideDrawer from './SlideDrawer';
+import { useEffect, useState } from "react";
+import SideDrawer from "./SideDrawer";
 
 const Header = () => {
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const [headerShow, setHeaderShow] = useState(false);
 
-    const toggleDrawer = (value) => {
-        setDrawerOpen(value);
-    };
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const [showHeader, setShowHeader] = useState(false);
+
+    const toggleDrawer = () => {
+        setOpenDrawer(!openDrawer)
+    }
 
     const handleScroll = () => {
         if (window.scrollY > 0) {
-            setHeaderShow(true);
+            setShowHeader(true);
         } else {
-            setHeaderShow(false);
+            setShowHeader(false);
         }
-    };
+    }
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll)
     }, []);
 
     return (
         <AppBar
             position="fixed"
-            className={`fixed top-0 w-full z-10 bg-transparent shadow-none transition-all ease-in-out duration-300 ${headerShow ? 'bg-gray-800' : 'bg-transparent'} shadow-none py-2`}
+            className="shadow-none text-white"
+            style={{
+                backgroundColor: showHeader ? '#2f2f2f' : 'transparent',
+                boxShadow: 'none'
+            }}
         >
-            <Toolbar className="flex justify-between items-center">
-                <div className="logo">
-                    <div className="text-lg font-bold">The Venue</div>
-                    <div className="text-sm">Musical Events</div>
+            <Toolbar className="flex justify-between">
+                <div className="flex flex-col">
+                    <div className="font-righteous text-xl md:text-2xl lg:text-4xl">The Venue</div>
+                    <div className="text-base md:text-lg lg:text-xl">Musical Events</div>
                 </div>
                 <IconButton
-                    edge="end"
                     color="inherit"
                     aria-label="menu"
-                    onClick={() => toggleDrawer(true)}
+                    onClick={toggleDrawer}
                 >
                     <MenuIcon />
                 </IconButton>
-                <SideDrawer open={drawerOpen} close={toggleDrawer} />
+                <SideDrawer open={openDrawer} close={() => toggleDrawer(openDrawer)} />
             </Toolbar>
         </AppBar>
-    );
-};
+    )
+}
 
 export default Header;
