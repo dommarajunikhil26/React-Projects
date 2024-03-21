@@ -92,6 +92,7 @@ export const useAuthToken = () => {
     return cookies['x-access-token'];
 };
 
+
 export const getAuthHeader = (token) => {
     if (!token) {
         console.error('No auth token found');

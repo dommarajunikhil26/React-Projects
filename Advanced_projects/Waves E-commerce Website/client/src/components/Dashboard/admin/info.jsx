@@ -6,6 +6,7 @@ import { errorHelper } from "../../utils/tools";
 
 import { useDispatch } from "react-redux";
 import { Button, TextField } from "@mui/material";
+import { userUpdateProfile } from "../../../store/actions/user.actions";
 
 const UserInfo = ({ users }) => {
     const dispatch = useDispatch();
@@ -23,10 +24,10 @@ const UserInfo = ({ users }) => {
             lastname: Yup.string()
                 .min(3, '3 characters minimum')
                 .max(45, 'Maximum 45 characters')
-                .required('Firstname is required'),
+                .required('Lasttname is required'),
         }),
         onSubmit: (values) => {
-            console.log(values);
+            dispatch(userUpdateProfile(values));
         }
     });
     return (

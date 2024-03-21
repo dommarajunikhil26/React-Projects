@@ -57,3 +57,23 @@ export const userSignOut = () => {
         dispatch(actions.successGlobal('Successfully signed out'));
     }
 }
+
+export const userUpdateProfile = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            const profile = await axios.patch(`${import.meta.env.VITE_SERVER_DOMAIN}/api/users/profile`, {
+                data: data
+            }, getAuthHeader());
+
+            const userData = {
+                ...getState().users.data,
+                firstname: profile.data.firstname,
+                lastname: profile.data.lastname
+            }
+            dispatch(actions.userUpdateProfile(userData))
+            dispatch(actions.successGlobal('Profile updated'));
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+}

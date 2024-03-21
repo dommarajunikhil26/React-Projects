@@ -17,7 +17,6 @@ import { userIsAuth, userSignOut } from "./store/actions/user.actions";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const users = useSelector(state => state.users);
-  console.log(users);
   const dispatch = useDispatch();
   axios.defaults.withCredentials = true;
 

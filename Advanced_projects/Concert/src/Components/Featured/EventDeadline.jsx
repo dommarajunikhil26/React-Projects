@@ -2,7 +2,6 @@ import { Slide } from 'react-awesome-reveal';
 import { useState, useEffect } from 'react';
 
 const EventDeadline = () => {
-
     const [time, setTime] = useState({
         days: '0',
         hours: '0',
@@ -25,10 +24,10 @@ const EventDeadline = () => {
 
     const getTimeUntil = (deadline) => {
         const time = Date.parse(deadline) - Date.parse(new Date());
-        const seconds = Math.floor((time/1000) % 60)
-        const minutes = Math.floor((time/1000/60) % 60)
-        const hours = Math.floor((time/(1000*60*60)) % 24)
-        const days = Math.floor((time/(1000*60*60*24)))
+        const seconds = Math.floor((time / 1000) % 60)
+        const minutes = Math.floor((time / 1000 / 60) % 60)
+        const hours = Math.floor((time / (1000 * 60 * 60)) % 24)
+        const days = Math.floor((time / (1000 * 60 * 60 * 24)))
 
         setTime({
             days,
@@ -44,11 +43,9 @@ const EventDeadline = () => {
 
     return (
         <Slide left delay={1000}>
-            <div className='countdown_wrapper'>
-                <div className='countdown_top'>
-                    Event starts in
-                </div>
-                <div className='countdown_bottom'>
+            <div className='absolute bottom-0 text-white'>
+                <div className='bg-orange-600 text-lg uppercase p-2 inline-block'>Event starts in</div>
+                <div className='flex bg-orange-700 p-3'>
                     {renderItem(time.days, 'Days')}
                     {renderItem(time.hours, 'Hrs')}
                     {renderItem(time.minutes, 'Min')}
@@ -56,7 +53,7 @@ const EventDeadline = () => {
                 </div>
             </div>
         </Slide>
-    )
-}
+    );
+};
 
 export default EventDeadline;

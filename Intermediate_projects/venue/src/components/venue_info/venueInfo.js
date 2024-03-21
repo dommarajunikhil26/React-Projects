@@ -23,7 +23,7 @@ const VenueInfo = () => {
                                         Event Date & Time
                                     </div>
                                     <div className='vn_desc'>
-                                        @Dec 9, 2023, 9:30:00
+                                        @Dec 9, 2024, 9:30:00
                                     </div>
                                 </div>
                             </div>
