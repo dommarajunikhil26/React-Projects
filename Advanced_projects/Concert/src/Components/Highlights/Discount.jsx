@@ -45,11 +45,12 @@ const Discount = () => {
                             quas sed, deleniti iste illum maiores laudantium impedit culpa laborum
                             excepturi! Eligendi, animi.
                         </p>
-                        <div className="w-full flex justify-center sm:flex">
+                        <div className="w-full md:w-[50%] flex justify-center sm:flex sm:justify-start">
                             <MyButton
                                 text="Purchase Tickets"
                                 link="https:www.google.com"
                                 size="small"
+                                className="w-full"
                                 style={{
                                     color: '#ffffff',
                                     background: '#ffa800'

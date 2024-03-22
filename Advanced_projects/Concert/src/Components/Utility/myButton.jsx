@@ -13,14 +13,16 @@ const MyButton = (props) => {
                 background: '#ffa800',
                 ...props.style
             }}
-            className='w-[50%] sm:w-[60%] md:w-[50%] lg:w-[40%]'
+            className='w-[100%] flex flex-row'
         >
-            <img
-                src={TicketIcon}
-                className="h-5"
-                alt='icon_buton'
-            />
-            {props.text}
+            <div className='flex flex-row justify-center'>
+                <img
+                    src={TicketIcon}
+                    className="h-5 pr-2"
+                    alt='icon_buton'
+                />
+                {props.text}
+            </div>
         </Button>
     )
 }
