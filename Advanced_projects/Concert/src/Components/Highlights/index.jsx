@@ -1,7 +1,11 @@
+import Description from "./Description";
+import Discount from "./Discount";
+
 const Highlights = () => {
     return (
-        <div className="h-[90vh] bg-gray-700">
-            Highlights
+        <div className="block min-h-[90vh]">
+            <Description />
+            <Discount />
         </div>
     )
 }

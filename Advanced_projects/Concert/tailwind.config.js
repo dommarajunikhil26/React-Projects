@@ -11,6 +11,8 @@ export default {
       },
       fontFamily: {
         righteous: ['Righteous', 'cursive'],
+        poppins: ['Poppins', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
       }
     },
   },

@@ -1,6 +1,6 @@
 const Pricing = () => {
     return (
-        <div className="h-[90vh] bg-gray-600">
+        <div className="mt-2 bg-gray-600">
             Pricing
         </div>
     )
